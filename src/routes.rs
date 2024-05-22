@@ -10,6 +10,11 @@ use crate::{
     templates::{self, IndexTemplate},
     utils::add_tailwind_classes,
 };
+// serve_static_files() function is used to serve static files from the public directory.
+pub fn serve_static_files() -> Router
+{
+    Router::new().nest_service("/", ServeDir::new("public"))
+}
 
 pub async fn index() -> impl IntoResponse
 {
@@ -24,11 +29,10 @@ pub async fn index() -> impl IntoResponse
     (StatusCode::OK, Html(reply_html).into_response())
 }
 
-pub fn serve_static_files() -> Router
-{
-    Router::new().nest_service("/", ServeDir::new("public"))
-}
 
+// HTMX ROUTES BELOW
+
+// creating a static counter to keep track of the number of times the more_content route is called per session.
 lazy_static! {
     static ref COUNTER: AtomicI32 = AtomicI32::new(1);
 }
