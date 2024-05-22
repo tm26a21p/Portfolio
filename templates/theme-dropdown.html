@@ -1,0 +1,25 @@
+<div class="max-w-4xl mx-auto p-6 shadow-lg rounded-lg bg-base-100">
+        <h1 class="text-3xl font-bold mb-4">Axhat Stack Template</h1>
+        <p class="mb-6">Welcome to my portfolio! Here you can find information about my projects, skills, and more.</p>
+
+        <div class="dropdown fixed top-0 right-0 mt-2 mr-2 z-50">
+                <div tabindex="0" role="button" class="btn m-1">
+                        Theme
+                        <svg width="12px" height="12px" class="h-2 w-2 fill-current opacity-60 inline-block"
+                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048">
+                                <path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path>
+                        </svg>
+                </div>
+                <ul tabindex="0"
+                        class="dropdown-content z-50 p-2 shadow-2xl bg-base-300 rounded-box w-52 max-h-96 overflow-auto">
+                        {% for theme in ["light", "dark", "cupcake", "bumblebee", "emerald", "corporate", "synthwave",
+                        "retro", "cyberpunk", "valentine", "halloween", "garden", "forest", "aqua", "lofi", "pastel",
+                        "fantasy", "wireframe", "black", "luxury", "dracula", "cmyk", "autumn", "business", "acid",
+                        "lemonade", "night", "coffee", "winter", "dim", "nord", "sunset"] %}
+                        <li class="py-1">
+                                <input type="radio" name="theme-dropdown" class="theme-controller"
+                                        aria-label="{{ theme | capitalize }}" value="{{ theme }}" /> {{ theme | capitalize }}
+                        </li>
+                        {% endfor %}
+                </ul>
+        </div>
