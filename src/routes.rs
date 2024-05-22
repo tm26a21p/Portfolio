@@ -1,11 +1,9 @@
 use std::sync::atomic::{AtomicI32, Ordering};
-
 use axum::{http::StatusCode, response::Html, Router};
 use tower_http::services::ServeDir;
 use askama_axum::{IntoResponse, Template};
 use lazy_static::lazy_static;
 use templates::MoreContentTemplate;
-
 use crate::{
     templates::{self, IndexTemplate},
     utils::add_tailwind_classes,
@@ -28,7 +26,6 @@ pub async fn index() -> impl IntoResponse
     let reply_html = template.render().expect("Failed to render template");
     (StatusCode::OK, Html(reply_html).into_response())
 }
-
 
 // HTMX ROUTES BELOW
 
