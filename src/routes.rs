@@ -6,7 +6,7 @@ use lazy_static::lazy_static;
 use templates::MoreContentTemplate;
 use crate::{
     templates::{self, IndexTemplate},
-    utils::add_tailwind_classes,
+    utils::{self, add_tailwind_classes},
 };
 // serve_static_files() function is used to serve static files from the public directory.
 pub fn serve_static_files() -> Router
@@ -19,9 +19,11 @@ pub async fn index() -> impl IntoResponse
     let readme_raw = IndexTemplate::get_readme();
     let readme_html = markdown::to_html(&readme_raw);
     let readme = add_tailwind_classes(&readme_html);
+    let daisy_theme = utils::random_daisy_theme();
     let template = templates::IndexTemplate {
         title: "Axhat Stack Template",
         readme: &readme,
+        daisy_theme: &daisy_theme,
     };
     let reply_html = template.render().expect("Failed to render template");
     (StatusCode::OK, Html(reply_html).into_response())
