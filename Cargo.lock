@@ -99,6 +99,7 @@ dependencies = [
  "axum",
  "lazy_static",
  "markdown",
+ "rand 0.8.5",
  "scraper",
  "serde",
  "tokio",
