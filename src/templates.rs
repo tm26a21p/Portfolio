@@ -16,6 +16,7 @@ pub struct IndexTemplate<'a>
 {
     pub title: &'a str,
     pub readme: &'a str,
+    pub daisy_theme: &'a str,
 }
 
 impl IndexTemplate<'_>
