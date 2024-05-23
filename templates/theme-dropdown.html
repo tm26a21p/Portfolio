@@ -1,5 +1,5 @@
-<div class="dropdown mt-2 mr-2 z-50">
-        <div tabindex="0" role="button" class="btn m-1">
+<li class="w-full dropdown m-0 p-0">
+        <div tabindex="0" role="button" id="theme-btn" class="btn btn-primary w-full">
                 Theme
                 <svg width="12px" height="12px" class="h-2 w-2 fill-current opacity-60 inline-block"
                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048">
@@ -7,7 +7,7 @@
                 </svg>
         </div>
         <ul tabindex="1"
-                class="dropdown-content z-50 p-2 shadow-2xl bg-base-300 rounded-box w-52 max-h-96 overflow-auto">
+                class="dropdown-content z-50 p-2 shadow-2xl bg-base-300 rounded-box w-full max-h-96 overflow-auto">
                 {% for theme in ["light", "dark", "cupcake", "bumblebee", "emerald", "corporate", "synthwave",
                 "retro", "cyberpunk", "valentine", "halloween", "garden", "forest", "aqua", "lofi", "pastel",
                 "fantasy", "wireframe", "black", "luxury", "dracula", "cmyk", "autumn", "business", "acid",
@@ -15,9 +15,8 @@
                 <li class="py-1">
                         <input type="radio" name="theme-dropdown"
                                 class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-                                aria-label="{{ theme }}" value="{{ theme }}" />
+                                aria-label="{{ theme }}" value="{{ theme }}">
                 </li>
-
                 {% endfor %}
         </ul>
-</div>
+</li>

@@ -4,7 +4,13 @@
 @import "daisyui";
 
 @layer base {
-  html, body {
+
+  html,
+  body {
     @apply font-sans;
   }
+}
+
+#theme-btn {
+  @apply btn btn-primary btn-block mb-2;
 }
