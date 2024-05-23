@@ -2,7 +2,7 @@ use std::collections::HashMap;
 
 use scraper::{Html as ScraperHtml, Selector};
 
-pub fn add_tailwind_classes(html: &str) -> String
+pub fn _add_tailwind_classes(html: &str) -> String
 {
     let document = ScraperHtml::parse_document(html);
     let mut result = String::new();
@@ -56,7 +56,7 @@ pub fn random_daisy_theme() -> String
     // grab the file : just a txt file with theme names
     let themes = read_daisy_theme_config("themes_list.daisy");
     // Extensions name don't matter, Windows will cry. Who cares?
-    let random_theme =
+    let random_theme: String =
         themes[random_number(themes.len() as u32 - 1) as usize].clone();
     random_theme
 }

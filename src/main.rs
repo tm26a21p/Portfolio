@@ -11,7 +11,8 @@ async fn main()
     tracing_subscriber::fmt::init();
     let app = Router::new()
         .route("/", get(index))
-        .route("/more-content", get(more_content))
+        .route("/about", get(about))
+        .route("/metrics", get(metrics))
         .nest("/public", routes::serve_static_files());
 
     let listener = tokio::net::TcpListener::bind("0.0.0.0:3000")

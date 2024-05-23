@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-{% block theme %}{{ theme }}{% endblock %}
+<html lang="en" data-theme="lemonade">
 
 <head>
     <title>{% block title %}{{ title }}{% endblock %}</title>
-    {% block head %}{% endblock %}
+    {% include "head.html" %}
 </head>
 
 <body class="font-sans">
-    {% block content %}{% endblock %}
+    {% block content %}
+    
+    {% endblock %}
 </body>
 
 </html>
