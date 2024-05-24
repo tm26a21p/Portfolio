@@ -13,7 +13,7 @@ pub fn using_serve_dir() -> Router
 pub async fn index(Extension(state): Extension<Common>) -> impl IntoResponse
 {
     let base = BaseT {
-        title: "Lpio - Home",
+        title: state.name.clone() + " - Home",
         daisy_theme: state.daisy_theme.clone(),
     };
     let template = IndexT { base };
@@ -25,7 +25,7 @@ pub async fn metrics(Extension(state): Extension<Common>)
     -> impl IntoResponse
 {
     let base = BaseT {
-        title: "Lpio - Metrics",
+        title: state.name.clone() + " - Metrics",
         daisy_theme: state.daisy_theme.clone(),
     };
     let template = MetricsT { base };
