@@ -33,4 +33,14 @@ pub async fn metrics(Extension(state): Extension<Common>)
     (StatusCode::OK, Html(reply_html).into_response())
 }
 
-pub async fn about() {}
+pub async fn about(Extension(state): Extension<Common>)
+    -> impl IntoResponse
+{
+    let base = BaseT {
+        title: state.name.clone() + " - About",
+        daisy_theme: state.daisy_theme.clone(),
+    };
+    let template = AboutT { base };
+    let reply_html = template.render().expect("Failed to render template");
+    (StatusCode::OK, Html(reply_html).into_response())
+}
