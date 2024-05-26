@@ -4,5 +4,56 @@
 {% block title %}{{ base.title }}{% endblock %}
 
 {% block content %}
-{% include "diff.html" %}
+<div class="hero min-h-screen bg-base-200">
+    <div class="container mx-auto p-4 pt-6 md:p-6 lg:p-12 xl:p-20">
+        <h1 class="text-6xl font-bold mb-2 ml-1">Hey there ! I'm Louis</h1>
+        <div class="ml-2">
+            <p class="text-lg">I'm a Software Engineer from <a class="text-info"
+                    href="https://www.google.com/maps/place/Paris,+France/@48.8588548,2.347035,12z/data=!3m1!4b1!4m6!3m5!1s0x47e66e1f06e2b70f:0x40b82c3688c9460!8m2!3d48.8575475!4d2.3513765!16zL20vMDVxdGo?entry=ttu">Paris,
+                    France</a>.</p>
+            <p class="text-lg">This project has been built using the <a
+                    href="https://github.com/tm26a21p/axhat-stack-template">Axhat
+                    Stack</a>.</p>
+            <p class="text-lg">I hope you have fun with it as much as I had building it !</p>
+            <p class="text-lg mb-4">You can also edit, share and copy this project <strong>for free </strong><a
+                    href="https://github.com/tm26a21p/axhat-stack-template" target="_blank">on GitHub</a>. Learn <a
+                    href="/https://en.wikipedia.org/wiki/Open_source" target="_blank">why</a>.</p>
+
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <a href="/projects">
+                <div
+                    class="card shadow bg-base-100 hover:shadow-lg transition duration-300 ease-in-out glass rounded-box">
+
+                    <div class="card-body">
+                        <h2 class="text-xl font-bold mb-2 text-primary">Projects</h2>
+                        <p>Discover more about my projects and what I'm currently working on.</p>
+                    </div>
+                </div>
+            </a>
+
+            <a href="/playground">
+                <div
+                    class="card shadow bg-base-100 hover:shadow-lg transition duration-300 ease-in-out glass rounded-box">
+                    <div class="card-body">
+                        <h2 class="text-xl font-bold mb-2 text-secondary">Playground</h2>
+                        <p>Check out my playground to see fun stuff about what a web page can actually do!</p>
+                    </div>
+                </div>
+            </a>
+
+            <a href="/metrics">
+                <div
+                    class="card shadow bg-base-100 hover:shadow-lg transition duration-300 ease-in-out glass rounded-box">
+
+                    <div class="card-body">
+                        <h2 class="text-xl font-bold mb-2 text-info">Metrics</h2>
+                        <p>Data shapes business decisions. Data is information, and information is power.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+    </div>
+</div>
 {% endblock %}
