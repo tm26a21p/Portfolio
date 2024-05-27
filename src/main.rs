@@ -15,7 +15,7 @@ async fn main()
 
     let app = Router::new()
         .route("/", get(index))
-        .route("/about", get(about))
+        .route("/home", get(index))
         .route("/metrics", get(metrics))
         .nest("/public", using_serve_dir())
         .layer(Extension(state.clone()));
