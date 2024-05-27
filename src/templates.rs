@@ -17,4 +17,8 @@ pub struct IndexT {
 #[template(path = "metrics.html")]
 pub struct MetricsT {
     pub base: BaseT,
+    pub likes: usize,
+    pub likes_percent_over_last_month: f64,
+    pub views: usize,
+    pub view_percent_over_to_last_month: f64,
 }
