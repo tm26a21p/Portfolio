@@ -16,9 +16,9 @@
 }
 
 .card:hover {
-  @apply shadow-lg border-primary ring-4;
+  @apply shadow-lg border-primary ring-8;
 }
 
 .link:hover {
-  @apply shadow-lg border-primary ring-4;
+  @apply shadow-lg border-primary ring-8;
 }
