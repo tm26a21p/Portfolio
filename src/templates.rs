@@ -18,9 +18,3 @@ pub struct IndexT {
 pub struct MetricsT {
     pub base: BaseT,
 }
-
-#[derive(Template)]
-#[template(path = "about.html")]
-pub struct AboutT {
-    pub base: BaseT,
-}
