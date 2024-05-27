@@ -6,7 +6,7 @@ use crate::{state::Common, templates::*};
 
 pub fn using_serve_dir() -> Router
 {
-    // serve the file in the "assets" directory under `/assets`
+    // serve the file in the "public" directory
     Router::new().nest_service("/", ServeDir::new("public"))
 }
 
@@ -29,18 +29,6 @@ pub async fn metrics(Extension(state): Extension<Common>)
         daisy_theme: state.daisy_theme.clone(),
     };
     let template = MetricsT { base };
-    let reply_html = template.render().expect("Failed to render template");
-    (StatusCode::OK, Html(reply_html).into_response())
-}
-
-pub async fn about(Extension(state): Extension<Common>)
-    -> impl IntoResponse
-{
-    let base = BaseT {
-        title: state.name.clone() + " - About",
-        daisy_theme: state.daisy_theme.clone(),
-    };
-    let template = AboutT { base };
     let reply_html = template.render().expect("Failed to render template");
     (StatusCode::OK, Html(reply_html).into_response())
 }
