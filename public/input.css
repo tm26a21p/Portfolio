@@ -22,3 +22,7 @@
 .link:hover {
   @apply shadow-lg border-primary ring-8;
 }
+
+p {
+  @apply subpixel-antialiased;
+}
