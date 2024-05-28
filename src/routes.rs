@@ -3,6 +3,7 @@ use tower_http::services::ServeDir;
 use askama_axum::{IntoResponse, Template};
 
 use crate::{state::Common, templates::*};
+use crate::project::Project;
 
 pub fn using_serve_dir() -> Router
 {
@@ -34,6 +35,23 @@ pub async fn metrics(Extension(state): Extension<Common>)
         likes_percent_over_last_month: 0.0,
         views: 0,
         view_percent_over_to_last_month: 0.0,
+    };
+    let reply_html = template.render().expect("Failed to render template");
+    (StatusCode::OK, Html(reply_html).into_response())
+}
+
+pub async fn projects(Extension(state): Extension<Common>)
+    -> impl IntoResponse
+{
+    let base = BaseT {
+        title: state.name.clone() + " - Projects",
+        daisy_theme: state.daisy_theme.clone(),
+    };
+    let projects = Project::get_repos().await
+        .expect("Failed to get repos from Github API");
+    let template = ProjectsT { 
+        base,
+        projects,
     };
     let reply_html = template.render().expect("Failed to render template");
     (StatusCode::OK, Html(reply_html).into_response())

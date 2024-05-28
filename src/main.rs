@@ -1,5 +1,5 @@
 use axum::{extract::Extension, routing::get, Router};
-mod projects;
+mod project;
 mod routes;
 mod state;
 mod templates;
