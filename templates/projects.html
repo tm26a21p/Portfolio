@@ -5,21 +5,20 @@
 
 {% block content %}
 <div class="p-2 mt-20">
-    <h2 class="text-3xl font-bold mb-4">Projects</h2>
     <div class="grid lg:grid-cols-4 m-10">
         {% for project in projects %}
-        <a href="{{project.url}}" class="card shadow-xl rounded-box m-4">
+        <a href="{{project.url}}" class="card m-4">
             {# <figure>
                 <img width="50" height="50" class="object-scale-down rounded-full fixed" src="/public/avatar.png"
                     alt="{{ project.name }}" />
             </figure> #}
-            <div class="card-body">
-                <h2 class="card-title">{{ project.name }}
-                    <div class="badge badge-secondary">NEW</div>
+            <div class="card-body shadow-xl rounded-box">
+                <h2 class="card-title text-primary">{{ project.name }}
+                    {% if project.new %} <div class="badge badge-secondary">NEW</div>{% endif %}
                 </h2>
                 <p>{{ project.description }}</p>
-                <div class="flex justify-end mt-4">
-                    <div class="badge badge-outline mr-2">{{project.stars}}
+                <div class="flex justify-end items-center mt-4">
+                    <div class="badge mr-1">{{project.stars}}
                         <svg width="12px" height="12px" viewBox="0 0 24 24" fill="none"
                             xmlns="http://www.w3.org/2000/svg" color="#000000" stroke-width="1.5" class="ml-1">
                             <path
@@ -29,7 +28,8 @@
                             </path>
                         </svg>
                     </div>
-                    <div class="badge badge-outline">{{project.forks}}</div>
+                    <div class="badge rounded-box">{{project.forks}}</div>
+                    <div class="badge badge-xs rounded-box p-4">last commit:<br>{{project.last_commit}}</div>
                 </div>
             </div>
         </a>
