@@ -3,3 +3,4 @@ public/style.css
 node_modules/
 bun.lockb
 .DS_Store
+.env
