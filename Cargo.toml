@@ -21,6 +21,7 @@ rand = "0.8"
 tower = "0.4.13"
 octocrab = "0.38.0"
 dotenv = "0.15.0"
+chrono = "0.4.38"
 
 [profile.dev.package.askama_derive]
 opt-level = 3
