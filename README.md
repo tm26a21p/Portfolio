@@ -1,3 +1,4 @@
+![Repository Logo](assets/portfolio_logo.jpeg)
 # [Portfolio](https://lpio.me)
 
 Welcome to my personal portfolio website repository! This aims to be a easy-to-use and customizable portfolio website template for developers.
