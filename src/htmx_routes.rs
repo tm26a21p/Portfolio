@@ -1,15 +1,34 @@
+use axum::{
+    extract::Extension,
+    http::StatusCode,
+    response::{Html, IntoResponse},
+};
+use askama_axum::Template;
 
-// creating a static counter to keep track of the number of times the more_content route is called per session.
-// lazy_static! {
-//     static ref COUNTER: AtomicI32 = AtomicI32::new(1);
-// }
+use crate::{htmx_templates::*, state::Common, project::Project};
 
-// pub async fn more_content() -> impl IntoResponse
-// {
-//     let n = COUNTER.fetch_add(1, Ordering::SeqCst);
-//     let reply_html = MoreContentTemplate { n }
-//         .render()
-//         .expect("Failed to render template");
-//     println!("reply: {}", reply_html);
-//     (StatusCode::OK, Html(reply_html).into_response())
-// }
+pub async fn projects(
+    Extension(_state): Extension<Common>
+) -> impl IntoResponse
+{
+    let projects = Project::get_repos()
+        .await
+        .expect("Failed to get repos from Github API");
+    let reply_html = TabsT { liked: false, projects }
+        .render()
+        .expect("Failed to render template");
+    (StatusCode::OK, Html(reply_html).into_response())
+}
+
+pub async fn projects_liked(
+    Extension(_state): Extension<Common>
+) -> impl IntoResponse
+{
+    let projects = Project::get_repos()
+        .await
+        .expect("Failed to get repos from Github API");
+    let reply_html = TabsT { liked: true, projects }
+        .render()
+        .expect("Failed to render template");
+    (StatusCode::OK, Html(reply_html).into_response())
+}

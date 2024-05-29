@@ -3,12 +3,12 @@
 
 <head>
     <title>{% block title %}{{ title }}{% endblock %}</title>
-    {% include "head.html" %}
+    {% include "components/head.html" %}
 </head>
 
 <body class="font-sans">
     <div id="main" class="mx-auto">
-        {% include "drawer.html" %}
+        {% include "components/drawer.html" %}
         {% block content %}
 
         {% endblock %}
