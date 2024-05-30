@@ -1,22 +1,26 @@
 use askama_axum::Template;
+
 use crate::project::Project;
 
 #[derive(Template)]
 #[template(path = "base.html")]
-pub struct BaseT {
+pub struct BaseT
+{
     pub title: String,
     pub daisy_theme: String,
 }
 
 #[derive(Template)]
-#[template(path = "index.html")]
-pub struct IndexT {
+#[template(path = "pages/index.html")]
+pub struct IndexT
+{
     pub base: BaseT,
 }
 
 #[derive(Template)]
-#[template(path = "metrics.html")]
-pub struct MetricsT {
+#[template(path = "pages/metrics.html")]
+pub struct MetricsT
+{
     pub base: BaseT,
     pub likes: usize,
     pub likes_percent_over_last_month: f64,
@@ -25,8 +29,9 @@ pub struct MetricsT {
 }
 
 #[derive(Template)]
-#[template(path = "projects.html")]
-pub struct ProjectsT {
+#[template(path = "pages/projects.html")]
+pub struct ProjectsT
+{
     pub base: BaseT,
     pub projects: Vec<Project>,
 }
