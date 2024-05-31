@@ -15,6 +15,7 @@ pub struct BaseT
 pub struct IndexT
 {
     pub base: BaseT,
+    pub version: String,
 }
 
 #[derive(Template)]
