@@ -15,7 +15,7 @@ impl Common
     {
         Self {
             name: "Lpio".to_string(),
-            version: "0.1.0".to_string(),
+            version: "0.0.1".to_string(),
             daisy_theme: random_daisy_theme()
         }
     }
