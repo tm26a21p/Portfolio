@@ -2,8 +2,7 @@ use axum::{extract::Extension, http::StatusCode, response::Html, Router};
 use tower_http::services::ServeDir;
 use askama_axum::{IntoResponse, Template};
 
-use crate::{state::Common, templates::*};
-use crate::project::Project;
+use crate::{project::Project, state::Common, templates::*};
 
 pub fn using_serve_dir() -> Router
 {
@@ -17,19 +16,23 @@ pub async fn index(Extension(state): Extension<Common>) -> impl IntoResponse
         title: state.name.clone() + " - Home",
         daisy_theme: state.daisy_theme.clone(),
     };
-    let template = IndexT { base };
+    let template = IndexT {
+        base,
+        version: state.version.clone(),
+    };
     let reply_html = template.render().expect("Failed to render template");
     (StatusCode::OK, Html(reply_html).into_response())
 }
 
-pub async fn metrics_page(Extension(state): Extension<Common>)
-    -> impl IntoResponse
+pub async fn metrics_page(
+    Extension(state): Extension<Common>
+) -> impl IntoResponse
 {
     let base = BaseT {
         title: state.name.clone() + " - Metrics",
         daisy_theme: state.daisy_theme.clone(),
     };
-    let template = MetricsT { 
+    let template = MetricsT {
         base,
         likes: 0,
         likes_percent_over_last_month: 0.0,
@@ -40,19 +43,18 @@ pub async fn metrics_page(Extension(state): Extension<Common>)
     (StatusCode::OK, Html(reply_html).into_response())
 }
 
-pub async fn projects_page(Extension(state): Extension<Common>)
-    -> impl IntoResponse
+pub async fn projects_page(
+    Extension(state): Extension<Common>
+) -> impl IntoResponse
 {
     let base = BaseT {
         title: state.name.clone() + " - Projects",
         daisy_theme: state.daisy_theme.clone(),
     };
-    let projects = Project::get_repos().await
+    let projects = Project::get_repos()
+        .await
         .expect("Failed to get repos from Github API");
-    let template = ProjectsT { 
-        base,
-        projects,
-    };
+    let template = ProjectsT { base, projects };
     let reply_html = template.render().expect("Failed to render template");
     (StatusCode::OK, Html(reply_html).into_response())
 }
@@ -65,7 +67,7 @@ pub async fn projects_page(Extension(state): Extension<Common>)
 //     };
 //     let project = Project::get_repo(id).await
 //         .expect("Failed to get repo from Github API");
-//     let template = ProjectT { 
+//     let template = ProjectT {
 //         base,
 //         project,
 //     };
