@@ -24,7 +24,7 @@ pub async fn projects_liked(
     Extension(_state): Extension<Common>
 ) -> impl IntoResponse
 {
-    let projects = Project::get_repos()
+    let projects = Project::get_repos_liked()
         .await
         .expect("Failed to get repos from Github API");
     let reply_html = TabsT { liked: true, projects }
