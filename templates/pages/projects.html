@@ -6,37 +6,6 @@
 {% block content %}
 <div class="p-2 mt-20">
     <div id="tabs" hx-get="/api/projects" hx-trigger="load" hx-target="#tabs" hx-swap="innerHTML">
-
     </div>
-    {# <div class="grid lg:grid-cols-4 m-10">
-        {% for project in projects %}
-        <a href="{{project.url}}" class="card m-4">
-            {# <figure>
-                <img width="50" height="50" class="object-scale-down rounded-full fixed" src="/public/avatar.png"
-                    alt="{{ project.name }}" />
-            </figure> #}
-            <div class="card-body shadow-xl rounded-box">
-                <h2 class="card-title text-primary">{{ project.name }}
-                    {% if project.new %} <div class="badge badge-secondary">NEW</div>{% endif %}
-                </h2>
-                <p class="font-medium text-slate-50">{{ project.description }}</p>
-                <div class="flex justify-end items-center mt-4">
-                    <div class="badge mr-1">{{project.stars}}
-                        <svg width="12px" height="12px" viewBox="0 0 24 24" fill="none"
-                            xmlns="http://www.w3.org/2000/svg" color="#000000" stroke-width="1.5" class="ml-1">
-                            <path
-                                d="M8.58737 8.23597L11.1849 3.00376C11.5183 2.33208 12.4817 2.33208 12.8151 3.00376L15.4126 8.23597L21.2215 9.08017C21.9668 9.18848 22.2638 10.0994 21.7243 10.6219L17.5217 14.6918L18.5135 20.4414C18.6409 21.1798 17.8614 21.7428 17.1945 21.3941L12 18.678L6.80547 21.3941C6.1386 21.7428 5.35909 21.1798 5.48645 20.4414L6.47825 14.6918L2.27575 10.6219C1.73617 10.0994 2.03322 9.18848 2.77852 9.08017L8.58737 8.23597Z"
-                                fill="white" stroke="black" stroke-width="1" stroke-linecap="round"
-                                stroke-linejoin="round">
-                            </path>
-                        </svg>
-                    </div>
-                    <div class="badge rounded-box">{{project.forks}}</div>
-                    <div class="badge badge-xs rounded-box p-4">last commit:<br>{{project.last_commit}}</div>
-                </div>
-            </div>
-        </a>
-        {% endfor %}
-    </div> #}
 </div>
 {% endblock %}
