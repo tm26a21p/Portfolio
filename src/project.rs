@@ -62,6 +62,8 @@ impl Project
         let mut projects = vec![];
         for repo in my_repos {
             let updated_at = repo.updated_at.unwrap_or_default();
+            // let total_commits = octocrab.current().
+            // let total_commit = octocrab.current().list_commits(repo.owner.unwrap().login, repo.name).per_page(1).send().await?.len() as u32;
             let formatted_date = format!(
                 "{:02}-{:02}-{:04}",
                 updated_at.day(),
@@ -73,7 +75,12 @@ impl Project
                 now.signed_duration_since(repo.created_at.unwrap_or_default());
             let new = duration.num_days() < 30;
             let project = Project::new(
-                format!("https://github.com/{}/{}", repo.owner.unwrap().login, repo.name).as_str(),
+                format!(
+                    "https://github.com/{}/{}",
+                    repo.owner.unwrap().login,
+                    repo.name
+                )
+                .as_str(),
                 &repo.name,
                 &repo
                     .description
@@ -89,5 +96,24 @@ impl Project
             projects.push(project);
         }
         Ok(projects)
+    }
+
+    pub async fn get_repos_liked() -> octocrab::Result<Vec<Project>>
+    {
+        // let token = std::env::var("GITHUB_TOKEN")
+        // .expect("GITHUB_TOKEN env variable is required");
+        let dummy = Project::new(
+            "www.google.com",
+            "Google",
+            "Search engine",
+            1000000,
+            100000,
+            0,
+            0,
+            0,
+            "2021-09-01".to_string(),
+            false,
+        );
+        return Ok(vec![dummy]);
     }
 }
