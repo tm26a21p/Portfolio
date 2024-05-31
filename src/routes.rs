@@ -22,7 +22,7 @@ pub async fn index(Extension(state): Extension<Common>) -> impl IntoResponse
     (StatusCode::OK, Html(reply_html).into_response())
 }
 
-pub async fn metrics(Extension(state): Extension<Common>)
+pub async fn metrics_page(Extension(state): Extension<Common>)
     -> impl IntoResponse
 {
     let base = BaseT {
@@ -40,7 +40,7 @@ pub async fn metrics(Extension(state): Extension<Common>)
     (StatusCode::OK, Html(reply_html).into_response())
 }
 
-pub async fn projects(Extension(state): Extension<Common>)
+pub async fn projects_page(Extension(state): Extension<Common>)
     -> impl IntoResponse
 {
     let base = BaseT {
@@ -56,3 +56,19 @@ pub async fn projects(Extension(state): Extension<Common>)
     let reply_html = template.render().expect("Failed to render template");
     (StatusCode::OK, Html(reply_html).into_response())
 }
+
+// pub async fn project(state: Extension<Common>, id: u32) -> impl IntoResponse
+// {
+//     let base = BaseT {
+//         title: state.name.clone() + " - Project ",
+//         daisy_theme: state.daisy_theme.clone(),
+//     };
+//     let project = Project::get_repo(id).await
+//         .expect("Failed to get repo from Github API");
+//     let template = ProjectT { 
+//         base,
+//         project,
+//     };
+//     let reply_html = template.render().expect("Failed to render template");
+//     (StatusCode::OK, Html(reply_html).into_response())
+// }
