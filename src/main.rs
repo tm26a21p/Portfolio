@@ -27,6 +27,7 @@ async fn main()
         .route("/home", get(index))
         .route("/metrics", get(metrics_page))
         .route("/projects", get(projects_page))
+        .route("/playground", get(playground_page))
         // .route("/projects/{id}", get(project))
         // htmx routes
         .route("/api/projects", get(projects))
