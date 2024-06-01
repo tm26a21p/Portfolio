@@ -1,17 +1,15 @@
 <div class="flex justify-center">
-    <div class="tabs tabs-boxed mx-auto inline-flex space-x-2 rounded" role="tablist">
+    <div class="tabs tabs-boxed mx-auto inline-flex space-x-2 rounded-lg" role="tablist">
         {% if liked == false %}
-        <button hx-get="/api/projects" class="tab tab-active selected rounded-lg" role="tab" aria-selected="true"
-            aria-controls="tab-content">My projects</button>
-        <button hx-get="/api/projects-liked" class="tab rounded-lg" role="tab" aria-selected="false"
-            aria-controls="tab-content">Projects
-            liked</button>
-        {% else %}
-        <button hx-get="/api/projects" class="tab rounded-lg" role="tab" aria-selected="false"
-            aria-controls="tab-content">My
-            projects</button>
-        <button hx-get="/api/projects-liked" class="tab tab-active selected rounded-lg" role="tab" aria-selected="true"
+        <button hx-get="/api/projects" class="tab tab-active selected rounded-lg text-base text-primary font-medium" role="tab"
+            aria-selected="true" aria-controls="tab-content">My projects</button>
+        <button hx-get="/api/projects-liked" class="tab rounded-lg text-base text-primary font-medium" role="tab" aria-selected="false"
             aria-controls="tab-content">Projects liked</button>
+        {% else %}
+        <button hx-get="/api/projects" class="tab rounded-lg text-base text-primary font-medium" role="tab" aria-selected="false"
+            aria-controls="tab-content">My projects</button>
+        <button hx-get="/api/projects-liked" class="tab tab-active selected rounded-lg text-base text-primary font-medium" role="tab"
+            aria-selected="true" aria-controls="tab-content">Projects liked</button>
         {% endif %}
     </div>
 </div>
