@@ -74,3 +74,18 @@ pub async fn projects_page(
 //     let reply_html = template.render().expect("Failed to render template");
 //     (StatusCode::OK, Html(reply_html).into_response())
 // }
+
+pub async fn playground_page(
+    Extension(state): Extension<Common>
+) -> impl IntoResponse
+{
+    let base = BaseT {
+        title: state.name.clone() + " - Playground",
+        daisy_theme: state.daisy_theme.clone(),
+    };
+    let template = PlaygroundT {
+        base
+    };
+    let reply_html = template.render().expect("Failed to render template");
+    (StatusCode::OK, Html(reply_html).into_response())
+}
