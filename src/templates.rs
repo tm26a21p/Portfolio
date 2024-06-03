@@ -36,3 +36,10 @@ pub struct ProjectsT
     pub base: BaseT,
     pub projects: Vec<Project>,
 }
+
+#[derive(Template)]
+#[template(path = "pages/playground.html")]
+pub struct PlaygroundT
+{
+    pub base: BaseT,
+}
