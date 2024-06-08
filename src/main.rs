@@ -22,7 +22,7 @@ async fn main()
     dotenv().ok();
 
     let app = Router::new()
-        // classic routes
+        // pages routes
         .route("/", get(index))
         .route("/home", get(index))
         .route("/metrics", get(metrics_page))
