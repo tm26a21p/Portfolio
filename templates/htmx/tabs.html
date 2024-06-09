@@ -1,14 +1,15 @@
 <div class="flex justify-center">
     <div class="tabs tabs-boxed mx-auto inline-flex space-x-2 rounded-lg" role="tablist">
         {% if liked == false %}
-        <button hx-get="/api/projects" class="tab tab-active selected rounded-lg text-base text-primary font-medium" role="tab"
-            aria-selected="true" aria-controls="tab-content">My projects</button>
-        <button hx-get="/api/projects-liked" class="tab rounded-lg text-base text-primary font-medium" role="tab" aria-selected="false"
-            aria-controls="tab-content">Projects liked</button>
+        <button hx-get="/api/projects" class="tab tab-active selected rounded-lg text-base text-primary font-medium"
+            role="tab" aria-selected="true" aria-controls="tab-content">My projects</button>
+        <button hx-get="/api/projects-liked" class="tab rounded-lg text-base text-primary font-medium" role="tab"
+            aria-selected="false" aria-controls="tab-content">Projects liked</button>
         {% else %}
-        <button hx-get="/api/projects" class="tab rounded-lg text-base text-primary font-medium" role="tab" aria-selected="false"
-            aria-controls="tab-content">My projects</button>
-        <button hx-get="/api/projects-liked" class="tab tab-active selected rounded-lg text-base text-primary font-medium" role="tab"
+        <button hx-get="/api/projects" class="tab rounded-lg text-base text-primary font-medium" role="tab"
+            aria-selected="false" aria-controls="tab-content">My projects</button>
+        <button hx-get="/api/projects-liked"
+            class="tab tab-active selected rounded-lg text-base text-primary font-medium" role="tab"
             aria-selected="true" aria-controls="tab-content">Projects liked</button>
         {% endif %}
     </div>
@@ -38,9 +39,13 @@
                             </path>
                         </svg>
                     </div>
-                    <div class="badge badge-success">{{project.forks}}</div>
                     <div class="badge badge-xs rounded-box p-1 text-xs">last commit: {{project.last_commit}}</div>
-                    {# <div class="badge badge-xs rounded-box p-4 text-xs">total commit:<br>0</div> #}
+                    <div class="badge badge-xs rounded-box p-1 text-xs">total commit: {{project.commits}}</div>
+                    <div class="badge badge-xs rounded-box p-1 text-xs">issues: {{project.issues}}</div>
+                    <div class="badge badge-xs rounded-box p-1 text-xs">forks: {{project.forks}}</div>
+                    <div class="badge badge-xs rounded-box p-1 text-xs">stars: {{project.pull_requests}}</div>
+
+
                 </div>
             </div>
         </a>
