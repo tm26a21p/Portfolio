@@ -8,10 +8,10 @@ use askama_axum::Template;
 use crate::{htmx_templates::*, state::Common, project::Project};
 
 pub async fn projects(
-    Extension(_state): Extension<Common>
+    Extension(state): Extension<Common>
 ) -> impl IntoResponse
 {
-    let projects = Project::get_repos()
+    let projects = Project::get_repositories(state.octocrab)
         .await
         .expect("Failed to get repos from Github API");
     let reply_html = TabsT { liked: false, projects }
@@ -21,13 +21,13 @@ pub async fn projects(
 }
 
 pub async fn projects_liked(
-    Extension(_state): Extension<Common>
+    Extension(state): Extension<Common>
 ) -> impl IntoResponse
 {
-    let projects = Project::get_repos_liked()
+    let projects = Project::get_repositories_liked(state.octocrab)
         .await
         .expect("Failed to get repos from Github API");
-    let reply_html = TabsT { liked: true, projects }
+    let reply_html = TabsT { liked: false, projects }
         .render()
         .expect("Failed to render template");
     (StatusCode::OK, Html(reply_html).into_response())
