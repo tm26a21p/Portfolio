@@ -18,8 +18,8 @@ async fn main()
 {
     tracing_subscriber::fmt::init();
 
-    let state = Common::new();
     dotenv().ok();
+    let state = Common::new();
 
     let app = Router::new()
         // pages routes
