@@ -1,4 +1,4 @@
-use octocrab::Octocrab;
+use octocrab::{models::Repository, Octocrab, Page};
 use chrono::{Datelike, Utc};
 
 pub struct Project
@@ -17,103 +17,97 @@ pub struct Project
 
 impl Project
 {
-    pub fn new(
-        url: &str,
-        name: &str,
-        description: &str,
-        stars: u32,
-        forks: u32,
-        issues: u32,
-        commits: u32,
-        pull_requests: u32,
-        last_commit: String,
-        new: bool,
-    ) -> Self
+    pub fn new(url: &str) -> Self
     {
         Self {
             url: url.to_string(),
-            name: name.to_string(),
-            description: description.to_string(),
-            stars,
-            forks,
-            issues,
-            commits,
-            pull_requests,
-            last_commit,
-            new,
+            name: "".to_string(),
+            description: "".to_string(),
+            stars: 0,
+            forks: 0,
+            issues: 0,
+            commits: 0,
+            pull_requests: 0,
+            last_commit: "".to_string(),
+            new: false,
         }
     }
 
-    pub async fn get_repos() -> octocrab::Result<Vec<Project>>
+    fn formatted_date(date: chrono::DateTime<Utc>) -> String
     {
-        let token = std::env::var("GITHUB_TOKEN")
-            .expect("GITHUB_TOKEN env variable is required");
+        format!("{:02}-{:02}-{:04}", date.day(), date.month(), date.year())
+    }
 
-        let octocrab = Octocrab::builder().personal_token(token).build()?;
-        let my_repos = octocrab
-            .current()
+    fn is_repo_new(date: chrono::DateTime<Utc>) -> bool
+    {
+        let now = Utc::now();
+        let days = now.signed_duration_since(date).num_days();
+        days <= 30
+    }
+
+    fn repo_url_format(
+        owner: &str,
+        name: &str,
+    ) -> String
+    {
+        format!("https://github.com/{}/{}", owner, name)
+    }
+
+    pub async fn get_repositories(
+        octo: Octocrab
+    ) -> octocrab::Result<Vec<Project>>
+    {
+        let repos = Project::fetch_user_repositories(octo).await?;
+        let projects = Project::process_repositories(repos);
+        Ok(projects)
+    }
+
+    pub async fn fetch_user_repositories(
+        octo: Octocrab
+    ) -> octocrab::Result<Page<Repository>>
+    {
+        octo.current()
             .list_repos_for_authenticated_user()
             .type_("owner")
             .sort("updated")
             .per_page(100)
             .send()
-            .await?;
-
-        let mut projects = vec![];
-        for repo in my_repos {
-            let updated_at = repo.updated_at.unwrap_or_default();
-            // let total_commits = octocrab.current().
-            // let total_commit = octocrab.current().list_commits(repo.owner.unwrap().login, repo.name).per_page(1).send().await?.len() as u32;
-            let formatted_date = format!(
-                "{:02}-{:02}-{:04}",
-                updated_at.day(),
-                updated_at.month(),
-                updated_at.year()
-            );
-            let now = Utc::now();
-            let duration =
-                now.signed_duration_since(repo.created_at.unwrap_or_default());
-            let new = duration.num_days() < 30;
-            let project = Project::new(
-                format!(
-                    "https://github.com/{}/{}",
-                    repo.owner.unwrap().login,
-                    repo.name
-                )
-                .as_str(),
-                &repo.name,
-                &repo
-                    .description
-                    .unwrap_or(format!("No description for {}", repo.name)),
-                repo.stargazers_count.unwrap_or(0),
-                repo.forks_count.unwrap_or_default(),
-                repo.open_issues_count.unwrap_or_default(),
-                0,
-                0,
-                formatted_date,
-                new,
-            );
-            projects.push(project);
-        }
-        Ok(projects)
+            .await
     }
 
-    pub async fn get_repos_liked() -> octocrab::Result<Vec<Project>>
+    pub fn process_repositories(repos: Page<Repository>) -> Vec<Project>
     {
-        // let token = std::env::var("GITHUB_TOKEN")
-        // .expect("GITHUB_TOKEN env variable is required");
-        let dummy = Project::new(
-            "www.google.com",
-            "Google",
-            "Search engine",
-            1000000,
-            100000,
-            0,
-            0,
-            0,
-            "2021-09-01".to_string(),
-            false,
-        );
-        return Ok(vec![dummy]);
+        repos
+            .into_iter()
+            .map(|repo| {
+                let last_commit = repo.updated_at.unwrap_or_default();
+                let last_commit = Project::formatted_date(last_commit);
+                let new =
+                    Project::is_repo_new(repo.created_at.unwrap_or_default());
+                let url = Project::repo_url_format(
+                    &repo.owner.unwrap().login,
+                    &repo.name,
+                );
+                Project {
+                    url,
+                    name: repo.name,
+                    description: repo.description.unwrap_or("".to_string()),
+                    stars: repo.stargazers_count.unwrap_or_default(),
+                    forks: repo.forks_count.unwrap_or_default(),
+                    issues: repo.open_issues_count.unwrap_or_default(),
+                    commits: 0,
+                    pull_requests: 0,
+                    last_commit,
+                    new,
+                }
+            })
+            .collect()
+    }
+
+    pub async fn get_repositories_liked(octo: Octocrab) -> octocrab::Result<Vec<Project>>
+    {
+        let repos = Project::fetch_user_repositories(octo).await?;
+        let projects = Project::process_repositories(repos);
+        Ok(projects)
     }
 }
