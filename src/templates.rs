@@ -24,9 +24,9 @@ pub struct MetricsT
 {
     pub base: BaseT,
     pub likes: usize,
-    pub likes_percent_over_last_month: f64,
+    pub likes_ratio_over_last_month: f64,
     pub views: usize,
-    pub view_percent_over_to_last_month: f64,
+    pub view_ratio_over_last_month: f64,
 }
 
 #[derive(Template)]
