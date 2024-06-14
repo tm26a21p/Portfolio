@@ -1,4 +1,8 @@
-use axum::{extract::Extension, routing::get, Router};
+use axum::{
+    extract::Extension,
+    routing::{get, post},
+    Router,
+};
 mod htmx_routes;
 mod htmx_templates;
 mod project;
@@ -32,13 +36,14 @@ async fn main()
         // htmx routes
         .route("/api/projects", get(projects))
         .route("/api/projects-liked", get(projects_liked))
+        .route("/api/set-theme", post(set_theme))
         .nest("/public", using_serve_dir())
         .layer(Extension(state.clone()));
 
     let listener = tokio::net::TcpListener::bind("0.0.0.0:4444")
         .await
         .expect("Failed to bind port 4444");
-    println!("Listening on: http://localhost:{}", 4444);
+    println!("Listening on: http://localhost:4444");
     axum::serve(listener, app.into_make_service())
         .await
         .expect("Server failed")

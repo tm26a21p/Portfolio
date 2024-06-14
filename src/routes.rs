@@ -14,7 +14,7 @@ pub async fn index(Extension(state): Extension<Common>) -> impl IntoResponse
 {
     let base = BaseT {
         title: state.name.clone() + " - Home",
-        daisy_theme: state.daisy_theme.clone(),
+        daisy_theme: state.get_theme(),
     };
     let template = IndexT {
         base,
@@ -30,7 +30,7 @@ pub async fn metrics_page(
 {
     let base = BaseT {
         title: state.name.clone() + " - Metrics",
-        daisy_theme: state.daisy_theme.clone(),
+        daisy_theme: state.get_theme(),
     };
     let template = MetricsT {
         base,
@@ -49,7 +49,7 @@ pub async fn projects_page(
 {
     let base = BaseT {
         title: state.name.clone() + " - Projects",
-        daisy_theme: state.daisy_theme.clone(),
+        daisy_theme: state.get_theme(),
     };
     let projects = Project::get_repositories(state.octocrab)
         .await
@@ -63,7 +63,7 @@ pub async fn projects_page(
 // {
 //     let base = BaseT {
 //         title: state.name.clone() + " - Project ",
-//         daisy_theme: state.daisy_theme.clone(),
+//         daisy_theme: state.get_theme(),
 //     };
 //     let project = Project::get_repo(id).await
 //         .expect("Failed to get repo from Github API");
@@ -81,7 +81,7 @@ pub async fn playground_page(
 {
     let base = BaseT {
         title: state.name.clone() + " - Playground",
-        daisy_theme: state.daisy_theme.clone(),
+        daisy_theme: state.get_theme(),
     };
     let template = PlaygroundT { base };
     let reply_html = template.render().expect("Failed to render template");
