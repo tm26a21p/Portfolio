@@ -44,6 +44,7 @@ pub fn read_daisy_theme_config(file_path: &str) -> Vec<String>
 }
 
 use rand::Rng;
+
 // Function to return a random number between 0 and `range`
 pub fn random_number(range: u32) -> u32
 {

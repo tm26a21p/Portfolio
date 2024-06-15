@@ -37,6 +37,8 @@ async fn main()
         .route("/api/projects", get(projects))
         .route("/api/projects-liked", get(projects_liked))
         .route("/api/set-theme", post(set_theme))
+        .route("/api/ip", get(ip_adress))
+        .route("/api/location", get(location))
         .nest("/public", using_serve_dir())
         .layer(Extension(state.clone()));
 

@@ -23,12 +23,11 @@
                 <tbody>
                     <tr>
                         <td class="border px-4 py-2">IP Address</td>
-                        <td class="border px-4 py-2">192.168.1.1</td>
+                        <td hx-get="/api/ip" hx-swap="innerHTML" hx-trigger="load" class="border px-4 py-2">Unknown
+                            address</td>
                     </tr>
-                    <tr>
-                        <td class="border px-4 py-2">Location</td>
-                        <td class="border px-4 py-2">San Francisco, CA, USA</td>
-                    </tr>
+                    <tr hx-get="/api/location" hx-swap="outerHTML" hx-trigger="load">
+
                     <tr>
                         <td class="border px-4 py-2">Device Type</td>
                         <td class="border px-4 py-2">Desktop</td>

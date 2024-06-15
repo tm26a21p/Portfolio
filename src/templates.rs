@@ -1,6 +1,6 @@
 use askama_axum::Template;
 
-use crate::project::Project;
+use crate::{htmx_templates::GeoLocation, project::Project, state::Metrics};
 
 #[derive(Template)]
 #[template(path = "base.html")]
@@ -23,10 +23,7 @@ pub struct IndexT
 pub struct MetricsT
 {
     pub base: BaseT,
-    pub likes: usize,
-    pub likes_ratio_over_last_month: f64,
-    pub views: usize,
-    pub view_ratio_over_last_month: f64,
+    pub metrics: Metrics,
 }
 
 #[derive(Template)]

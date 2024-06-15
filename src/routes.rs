@@ -32,17 +32,20 @@ pub async fn metrics_page(
         title: state.name.clone() + " - Metrics",
         daisy_theme: state.get_theme(),
     };
+
+    let mut metrics = state.metrics.write().unwrap();
+    metrics.visited += 1;
+    let metrics_clone = metrics.clone();
+    drop(metrics);
+
     let template = MetricsT {
         base,
-        likes: 0,
-        likes_ratio_over_last_month: 0.0,
-        views: 0,
-        view_ratio_over_last_month: 0.0,
+        metrics: metrics_clone,
     };
+
     let reply_html = template.render().expect("Failed to render template");
     (StatusCode::OK, Html(reply_html).into_response())
 }
-
 pub async fn projects_page(
     Extension(state): Extension<Common>
 ) -> impl IntoResponse

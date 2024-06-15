@@ -17,7 +17,7 @@ pub struct Project
 
 impl Project
 {
-    pub fn new(url: &str) -> Self
+    pub fn _new(url: &str) -> Self
     {
         Self {
             url: url.to_string(),
@@ -104,7 +104,9 @@ impl Project
             .collect()
     }
 
-    pub async fn get_repositories_liked(octo: Octocrab) -> octocrab::Result<Vec<Project>>
+    pub async fn get_repositories_liked(
+        octo: Octocrab
+    ) -> octocrab::Result<Vec<Project>>
     {
         let repos = Project::fetch_user_repositories(octo).await?;
         let projects = Project::process_repositories(repos);

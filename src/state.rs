@@ -10,6 +10,7 @@ pub struct Common
     pub daisy_theme: Arc<RwLock<String>>,
     pub _github_token: String,
     pub octocrab: octocrab::Octocrab,
+    pub metrics: Arc<RwLock<Metrics>>,
 }
 
 impl Common
@@ -27,6 +28,7 @@ impl Common
                 .personal_token(github_token)
                 .build()
                 .expect("Failed to create Octocrab instance."),
+            metrics: Arc::new(RwLock::new(Metrics::new())),
         }
     }
 
@@ -42,5 +44,25 @@ impl Common
     {
         let mut theme = self.daisy_theme.write().unwrap();
         *theme = new_theme;
+    }
+}
+
+#[derive(Debug, Clone)]
+pub struct Metrics
+{
+    pub visited: usize,
+    pub ip: String,
+    pub location: String,
+}
+
+impl Metrics
+{
+    pub fn new() -> Self
+    {
+        Self {
+            visited: 1,
+            ip: "Unknown".to_string(),
+            location: "Unknown".to_string(),
+        }
     }
 }

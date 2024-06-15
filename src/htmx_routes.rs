@@ -56,3 +56,63 @@ pub async fn set_theme(
     state.set_theme(payload.theme);
     (StatusCode::OK, "Theme set".into_response())
 }
+
+async fn get_ip() -> String
+{
+    reqwest::get("https://api.ipify.org")
+        .await
+        .expect("Failed to get ip")
+        .text()
+        .await
+        .expect("Failed to get ip")
+}
+
+pub async fn ip_adress(
+    Extension(state): Extension<Common>
+) -> impl IntoResponse
+{
+    let ip = get_ip().await;
+
+    let mut metrics = state.metrics.write().unwrap();
+    metrics.ip = ip.clone();
+    drop(metrics);
+    (StatusCode::OK, ip.into_response())
+}
+
+use ipgeolocate::{Locator, Service};
+
+async fn get_location(ip: &str) -> Option<GeoLocation>
+{
+    let service = Service::IpApi;
+    match Locator::get(ip, service).await {
+        Ok(response) => {
+            Some(GeoLocation {
+                latitude: response.latitude,
+                longitude: response.longitude,
+                city: response.city,
+                region: response.region,
+                country: response.country,
+                timezone: response.timezone,
+            })
+        }
+        Err(error) => {
+            eprintln!("Failed to get location: {:?}", error);
+            None
+        }
+    }
+}
+
+pub async fn location(
+    Extension(_state): Extension<Common>
+) -> impl IntoResponse
+{
+    let ip = get_ip().await;
+
+    let location = get_location(&ip).await.unwrap();
+    // let's acually return a jinja template with the location
+
+    let reply_html = LocationT { location }
+        .render()
+        .expect("Failed to render template");
+    (StatusCode::OK, Html(reply_html).into_response())
+}
