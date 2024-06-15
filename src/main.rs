@@ -39,6 +39,8 @@ async fn main()
         .route("/api/set-theme", post(set_theme))
         .route("/api/ip", get(ip_adress))
         .route("/api/location", get(location))
+        .route("/api/device_info", get(device_info))
+        .route("/api/visit_info", get(visit_info))
         .nest("/public", using_serve_dir())
         .layer(Extension(state.clone()));
 

@@ -114,3 +114,22 @@ pub async fn location(
         .expect("Failed to render template");
     (StatusCode::OK, Html(reply_html).into_response())
 }
+
+pub async fn device_info(
+    Extension(_state): Extension<Common>
+) -> impl IntoResponse
+{
+    let device_info = DeviceInfoT::new();
+    let reply_html = device_info.render().expect("Failed to render template");
+    (StatusCode::OK, Html(reply_html).into_response())
+}
+
+pub async fn visit_info(
+    Extension(_state): Extension<Common>
+) -> impl IntoResponse
+{
+    let reply_html = VisitInfoT::new()
+        .render()
+        .expect("Failed to render template");
+    (StatusCode::OK, Html(reply_html).into_response())
+}

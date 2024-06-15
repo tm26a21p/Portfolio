@@ -27,44 +27,24 @@
                             address</td>
                     </tr>
                     <tr hx-get="/api/location" hx-swap="outerHTML" hx-trigger="load">
-
-                    <tr>
-                        <td class="border px-4 py-2">Device Type</td>
-                        <td class="border px-4 py-2">Desktop</td>
                     </tr>
-                    <tr>
-                        <td class="border px-4 py-2">Operating System</td>
-                        <td class="border px-4 py-2">Windows 10</td>
+                    <tr hx-get="/api/device_info" hx-swap="outerHTML" hx-trigger="load">
                     </tr>
-                    <tr>
-                        <td class="border px-4 py-2">Browser</td>
-                        <td class="border px-4 py-2">Chrome</td>
-                    </tr>
-                    <tr>
-                        <td class="border px-4 py-2">Screen Resolution</td>
-                        <td class="border px-4 py-2">1920x1080</td>
-                    </tr>
-                    <tr>
-                        <td class="border px-4 py-2">Language</td>
-                        <td class="border px-4 py-2">en-US</td>
-                    </tr>
-                    <tr>
-                        <td class="border px-4 py-2">Referrer URL</td>
-                        <td class="border px-4 py-2">google.com</td>
-                    </tr>
-                    <tr>
-                        <td class="border px-4 py-2">Visit Time</td>
-                        <td class="border px-4 py-2">10:30 AM</td>
-                    </tr>
-                    <tr>
-                        <td class="border px-4 py-2">Visit Duration</td>
-                        <td class="border px-4 py-2">5 minutes</td>
+                    <tr hx-get="/api/visit_info" hx-swap="outerHTML" hx-trigger="load">
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+
+<div>
+    <input type="hidden" id="userAgent" name="userAgent" value="" hx-post="/user-info" hx-trigger="load" hx-swap="none">
+    hey
+</div>
+<script>
+    document.getElementById('userAgent').value = navigator.userAgent;
+</script>
 
 
 {% endblock %}

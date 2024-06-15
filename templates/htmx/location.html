@@ -10,8 +10,3 @@
     <td class="border px-4 py-2">Timezone</td>
     <td class="border px-4 py-2">{{location.timezone}}</td>
 </tr>
-<input type="hidden" id="userAgent" name="userAgent" value="" hx-post="/user-info" hx-trigger="load" hx-swap="none">
-</div>
-<script>
-    document.getElementById('userAgent').value = navigator.userAgent;
-</script>

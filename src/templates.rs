@@ -27,6 +27,7 @@ pub struct MetricsT
 }
 
 #[derive(Template)]
+#[allow(dead_code)]
 #[template(path = "pages/projects.html")]
 pub struct ProjectsT
 {

@@ -1,0 +1,28 @@
+<tr>
+    <td class="border px-4 py-2">Device Type</td>
+    <td class="border px-4 py-2">{{device}}</td>
+</tr>
+<tr>
+    <td class="border px-4 py-2">Operating System</td>
+    <td class="border px-4 py-2">{{os}}</td>
+</tr>
+<tr>
+    <td class="border px-4 py-2">Browser</td>
+    <td class="border px-4 py-2">{{browser}}</td>
+</tr>
+<tr>
+    <td class="border px-4 py-2">Screen Resolution</td>
+    <td id="Screen-res-target" class="border px-4 py-2">Javascript</td>
+</tr>
+<tr>
+    <td class="border px-4 py-2">Language</td>
+    <td class="border px-4 py-2">{{language}}</td>
+</tr>
+<tr>
+    <td class="border px-4 py-2">User agent</td>
+    <td class="border px-4 py-2">{{user_agent}}</td>
+</tr>
+
+<script>
+    document.getElementById('Screen-res-target').innerText = window.screen.width + 'x' + window.screen.height;
+</script>
