@@ -107,9 +107,7 @@ pub async fn location(
 ) -> impl IntoResponse
 {
     let ip = get_ip().await;
-
     let location = get_location(&ip).await.unwrap();
-    // let's acually return a jinja template with the location
 
     let reply_html = LocationT { location }
         .render()

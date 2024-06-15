@@ -52,7 +52,6 @@ pub struct Metrics
 {
     pub visited: usize,
     pub ip: String,
-    pub location: String,
 }
 
 impl Metrics
@@ -62,7 +61,6 @@ impl Metrics
         Self {
             visited: 1,
             ip: "Unknown".to_string(),
-            location: "Unknown".to_string(),
         }
     }
 }
