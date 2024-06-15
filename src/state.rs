@@ -50,8 +50,12 @@ impl Common
 #[derive(Debug, Clone)]
 pub struct Metrics
 {
+    pub visited_last_month: usize,
     pub visited: usize,
     pub ip: String,
+    pub likes: usize,
+    pub issues_open: usize,
+    pub issues_closed: usize,
 }
 
 impl Metrics
@@ -59,8 +63,36 @@ impl Metrics
     pub fn new() -> Self
     {
         Self {
+            visited_last_month: 6234,
             visited: 1,
             ip: "Unknown".to_string(),
+            likes: 0,
+            issues_open: 31,
+            issues_closed: 87,
         }
+    }
+
+    pub fn get_likes_ratio_over_last_month(&self) -> f64
+    {
+        // 2 decimal places
+        let ratio = (self.likes as f64 / self.visited as f64) * 100.0;
+        (ratio * 100.0).round() / 100.0
+    }
+
+    pub fn get_percent_issues_closed(&self) -> f64
+    {
+        // 2 decimal places
+        let percent = (self.issues_closed as f64
+            / (self.issues_open + self.issues_closed) as f64)
+            * 100.0;
+        (percent * 100.0).round() / 100.0
+    }
+
+    pub fn get_percent_views_over_last_month(&self) -> f64
+    {
+        // 2 decimal places
+        let percent =
+            (self.visited as f64 / self.visited_last_month as f64) * 100.0;
+        (percent * 100.0).round() / 100.0
     }
 }

@@ -10,8 +10,8 @@
             </svg>
         </div>
         <div class="stat-title">Total Likes</div>
-        <div class="stat-value text-primary"> data </div>
-        <div class="stat-desc"> data more than last month</div>
+        <div class="stat-value text-primary"> {{ metrics.likes }} </div>
+        <div class="stat-desc"> {{metrics.get_likes_ratio_over_last_month()}}% compared to last month</div>
     </div>
 
     <div class="stat">
@@ -23,8 +23,8 @@
             </svg>
         </div>
         <div class="stat-title">Website Views</div>
-        <div class="stat-value text-secondary">data </div>
-        <div class="stat-desc"> data more than last month</div>
+        <div class="stat-value text-secondary"> {{metrics.visited }} </div>
+        <div class="stat-desc"> {{metrics.get_percent_views_over_last_month()}}% compared to last month</div>
     </div>
 
     <div class="stat">
@@ -35,9 +35,9 @@
                 </div>
             </div>
         </div>
-        <div class="stat-value">86%</div>
-        <div class="stat-title">Tasks done</div>
-        <div class="stat-desc text-secondary">31 tasks remaining</div>
+        <div class="stat-value">{{ metrics.get_percent_issues_closed()}}%</div>
+        <div class="stat-title">Issues resolved / Issues opened</div>
+        <div class="stat-desc text-secondary">{{ metrics.issues_closed - metrics.issues_open }} issues remaining</div>
     </div>
 
 </div>

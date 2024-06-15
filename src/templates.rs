@@ -1,6 +1,6 @@
 use askama_axum::Template;
 
-use crate::{htmx_templates::GeoLocation, project::Project, state::Metrics};
+use crate::{project::Project, state::Metrics};
 
 #[derive(Template)]
 #[template(path = "base.html")]
