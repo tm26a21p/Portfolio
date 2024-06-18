@@ -4,47 +4,15 @@
 {% block title %}{{ base.title }}{% endblock %}
 
 {% block content %}
-<div class="flex justify-center">
+<div class="h-screen w-full flex flex-col justify-center items-center">
     <div class="container p-16 flex justify-center">
         {% include "components/stats.html" %}
     </div>
-</div>
-<div class="flex items-center justify-center bg-base-200 p-16">
-    <div class="container bg-base-200 p-16 rounded-lg shadow-lg">
-        <h2 class="text-2xl font-bold mb-4 text-primary text-center">What I Know About You</h2>
-        <div class="overflow-x-auto">
-            <table class="table-auto w-full bg-base-200">
-                <thead>
-                    <tr>
-                        <th class="px-4 py-2">Metric</th>
-                        <th class="px-4 py-2">Value</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="border px-4 py-2">IP Address</td>
-                        <td hx-get="/api/ip" hx-swap="innerHTML" hx-trigger="load" class="border px-4 py-2">Unknown
-                            address</td>
-                    </tr>
-                    <tr hx-get="/api/location" hx-swap="outerHTML" hx-trigger="load">
-                    </tr>
-                    <tr hx-get="/api/device_info" hx-swap="outerHTML" hx-trigger="load">
-                    </tr>
-                    <tr hx-get="/api/visit_info" hx-swap="outerHTML" hx-trigger="load">
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+    <div class="divider">⚓️</div>
 
-<div>
-    <input type="hidden" id="userAgent" name="userAgent" value="" hx-post="/user-info" hx-trigger="load" hx-swap="none">
-    hey
+    {% include "components/table_stats.html" %}
+
 </div>
-<script>
-    document.getElementById('userAgent').value = navigator.userAgent;
-</script>
 
 
 {% endblock %}

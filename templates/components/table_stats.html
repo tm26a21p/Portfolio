@@ -1,0 +1,24 @@
+<div class="overflow-x-auto flex justify-center items-center">
+    <table class="table table-zebra">
+        <thead>
+            <tr>
+                {# <th></th> #}
+                <th class="text-xl border-left">Metric</th>
+                <th class="text-xl border-left">Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="hover">
+                <td class="">IP Address</td>
+                <td hx-get="/api/ip" hx-swap="innerHTML" hx-trigger="load">Unknown
+                    address</td>
+            </tr>
+            <tr class="hover" hx-get="/api/location" hx-swap="outerHTML" hx-trigger="load">
+            </tr>
+            <tr class="hover" hx-get="/api/device_info" hx-swap="outerHTML" hx-trigger="load">
+            </tr>
+            <tr class="hover" hx-get="/api/visit_info" hx-swap="outerHTML" hx-trigger="load">
+            </tr>
+        </tbody>
+    </table>
+</div>

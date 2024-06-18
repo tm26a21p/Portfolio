@@ -7,6 +7,8 @@ use axum::{
     Form,
 };
 use askama_axum::Template;
+use axum_extra::{headers::*, TypedHeader};
+use octocrab::params::repos::Type;
 use serde::Deserialize;
 
 use crate::{htmx_templates::*, project::Project, state::Common};
@@ -116,20 +118,46 @@ pub async fn location(
 }
 
 pub async fn device_info(
+    Extension(state): Extension<Common>,
+    TypedHeader(user_agent): TypedHeader<UserAgent>,
+) -> impl IntoResponse
+{
+    let mut device_info = DeviceInfoT::new();
+    let ua = user_agent.to_string();
+    let ua_parser = state.ua_parser.read().unwrap();
+    let os = ua_parser.parse_os(&ua);
+    device_info.os = os.name.unwrap_or_default().to_string();
+    let device = ua_parser.parse_device(&ua);
+    device_info.device = device.name.unwrap_or_default().to_string()
+        + ", "
+        + &device.brand.unwrap_or_default()
+        + ", "
+        + &device.model.unwrap_or_default();
+    let product = ua_parser.parse_product(&ua);
+    device_info.browser = product.name.unwrap_or_default().to_string();
+    // device_info.language = "en".to_string();
+    // device_info.origin = origin.to_string();
+
+    let reply_html = device_info.render().expect("Failed to render template");
+    (StatusCode::OK, Html(reply_html).into_response())
+}
+
+pub async fn user_info(
     Extension(_state): Extension<Common>
 ) -> impl IntoResponse
 {
-    let device_info = DeviceInfoT::new();
-    let reply_html = device_info.render().expect("Failed to render template");
-    (StatusCode::OK, Html(reply_html).into_response())
+    // let reply_html = UserInfoT::new()
+    //     .render()
+    //     .expect("Failed to render template");
+    // (StatusCode::OK, Html(reply_html).into_response())
+    (StatusCode::OK, "User info".into_response())
 }
 
 pub async fn visit_info(
     Extension(_state): Extension<Common>
 ) -> impl IntoResponse
 {
-    let reply_html = VisitInfoT::new()
-        .render()
-        .expect("Failed to render template");
+    let v = VisitInfoT::new();
+    let reply_html = v.render().expect("Failed to render template");
     (StatusCode::OK, Html(reply_html).into_response())
 }

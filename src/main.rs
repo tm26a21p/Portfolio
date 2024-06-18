@@ -41,6 +41,7 @@ async fn main()
         .route("/api/location", get(location))
         .route("/api/device_info", get(device_info))
         .route("/api/visit_info", get(visit_info))
+        .route("/api/user_info", post(user_info))
         .nest("/public", using_serve_dir())
         .layer(Extension(state.clone()));
 

@@ -1,28 +1,29 @@
-<tr>
-    <td class="border px-4 py-2">Device Type</td>
-    <td class="border px-4 py-2">{{device}}</td>
+<tr class="hover">
+    <td>Device Type</td>
+    <td>{{device}}</td>
 </tr>
-<tr>
-    <td class="border px-4 py-2">Operating System</td>
-    <td class="border px-4 py-2">{{os}}</td>
+<tr class="hover">
+    <td>Operating System</td>
+    <td>{{os}}</td>
 </tr>
-<tr>
-    <td class="border px-4 py-2">Browser</td>
-    <td class="border px-4 py-2">{{browser}}</td>
+<tr class="hover">
+    <td>Browser</td>
+    <td>{{browser}}</td>
 </tr>
-<tr>
-    <td class="border px-4 py-2">Screen Resolution</td>
-    <td id="Screen-res-target" class="border px-4 py-2">Javascript</td>
+<tr class="hover">
+    <td>Window Resolution</td>
+    <td id="srt">
 </tr>
-<tr>
-    <td class="border px-4 py-2">Language</td>
-    <td class="border px-4 py-2">{{language}}</td>
+<tr class="hover">
+    <td>Language</td>
+    <td>{{language}}</td>
 </tr>
-<tr>
-    <td class="border px-4 py-2">User agent</td>
-    <td class="border px-4 py-2">{{user_agent}}</td>
-</tr>
-
-<script>
-    document.getElementById('Screen-res-target').innerText = window.screen.width + 'x' + window.screen.height;
+<script type="text/javascript">
+    document.getElementById('srt').innerHTML = window.innerWidth + 'x' + window.innerHeight;
+    // listen to the changes in the size of the window and change the value of the userAgent input field
+    window.addEventListener('resize', function () {
+        var width = window.innerWidth;
+        var height = window.innerHeight;
+        document.getElementById('srt').innerHTML = width + 'x' + height;
+    });
 </script>

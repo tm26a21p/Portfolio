@@ -34,7 +34,6 @@ pub struct DeviceInfoT
     pub device: String,
     pub os: String,
     pub browser: String,
-    pub user_agent: String,
     pub language: String,
 }
 
@@ -46,8 +45,7 @@ impl DeviceInfoT
             device: "device".to_string(),
             os: "os".to_string(),
             browser: "browser".to_string(),
-            user_agent: "user_agent".to_string(),
-            language: "language".to_string(),
+            language: "Unknown".to_string(),
         }
     }
 }
@@ -56,6 +54,7 @@ impl DeviceInfoT
 #[template(path = "htmx/visit_info.html")]
 pub struct VisitInfoT
 {
+    pub origin: String,
     pub average_time: usize,
     pub total_time: usize,
 }
@@ -65,6 +64,7 @@ impl VisitInfoT
     pub fn new() -> Self
     {
         Self {
+            origin: "Unknown".to_string(),
             average_time: 24,
             total_time: 0,
         }

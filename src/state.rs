@@ -1,5 +1,7 @@
 use std::sync::{Arc, RwLock};
 
+use user_agent_parser::UserAgentParser;
+
 use crate::utils::random_daisy_theme;
 
 #[derive(Debug, Clone)]
@@ -11,6 +13,7 @@ pub struct Common
     pub _github_token: String,
     pub octocrab: octocrab::Octocrab,
     pub metrics: Arc<RwLock<Metrics>>,
+    pub ua_parser: Arc<RwLock<UserAgentParser>>,
 }
 
 impl Common
@@ -29,6 +32,10 @@ impl Common
                 .build()
                 .expect("Failed to create Octocrab instance."),
             metrics: Arc::new(RwLock::new(Metrics::new())),
+            ua_parser: Arc::new(RwLock::new(
+                UserAgentParser::from_path("regexes.yaml")
+                    .expect("Failed to create UserAgentParser instance."),
+            )),
         }
     }
 
