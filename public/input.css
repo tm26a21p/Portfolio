@@ -9,20 +9,38 @@
   body {
     @apply font-sans;
   }
-}
 
-#theme-btn {
-  @apply btn btn-primary btn-block mb-2;
-}
+  #theme-btn {
+    @apply btn btn-primary btn-block mb-2;
+  }
 
-.card:hover {
-  @apply shadow-lg border-primary ring-8;
-}
+  .card:hover {
+    @apply shadow-lg border-primary ring-8;
+  }
 
-.link:hover {
-  @apply shadow-lg border-primary ring-8;
-}
+  .link:hover {
+    @apply shadow-lg border-primary ring-8;
+  }
 
-p {
-  @apply subpixel-antialiased;
+  p {
+    @apply subpixel-antialiased;
+  }
+
+  table tr td:first-child {
+    @apply p-4;
+    @apply font-extrabold;
+    @apply min-w-60;
+    @apply text-left;
+    @apply border-r-green-100;
+    @apply mr-4;
+  }
+
+  table tr td:nth-child(2) {
+    @apply p-4;
+    @apply min-w-60;
+    @apply text-left;
+    @apply border-l-2;
+    @apply ml-4;
+
+  }
 }
