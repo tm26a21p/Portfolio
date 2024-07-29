@@ -34,7 +34,7 @@ pub struct DeviceInfoT
     pub device: String,
     pub os: String,
     pub browser: String,
-    pub language: String,
+    pub _language: String,
 }
 
 impl DeviceInfoT
@@ -45,7 +45,7 @@ impl DeviceInfoT
             device: "device".to_string(),
             os: "os".to_string(),
             browser: "browser".to_string(),
-            language: "Unknown".to_string(),
+            _language: "Unknown".to_string(),
         }
     }
 }
@@ -56,7 +56,7 @@ pub struct VisitInfoT
 {
     pub origin: String,
     pub average_time: usize,
-    pub total_time: usize,
+    pub _total_time: usize,
 }
 
 impl VisitInfoT
@@ -66,7 +66,7 @@ impl VisitInfoT
         Self {
             origin: "Unknown".to_string(),
             average_time: 24,
-            total_time: 0,
+            _total_time: 0,
         }
     }
 }
